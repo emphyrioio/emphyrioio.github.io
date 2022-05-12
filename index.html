@@ -107,7 +107,7 @@
 
                         for (i = 0; i < quests.length; i++) {
                             let id = quests[i].getAttribute("id");
-                            let inner = quests[i].textContent;
+                            let inner = quests[i].innerHTML;
                             HTMLResult += "<input type=\"checkbox\" class=\"retrait1\" id=\"" + id + "\" onclick=\"save_checkbox(this.id)\">";
                             HTMLResult += "<label for=\"" + id + "\">" + inner + "</label><br/>";
                         }
