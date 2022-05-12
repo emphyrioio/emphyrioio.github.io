@@ -43,5 +43,13 @@ var XMLString = `
 		Parler une dernière fois Varré le Blême vers la sortie de la grande salle, près du site de grâce centre du Mausolée de la dynastie.
 	</quest>
 	<!-- Quête de Varré le Blême : FIN -->
+    <!-- Quête de Ranni la sorcière : DEBUT -->
+    <quest id="ran1" npc="Ranni la sorcière" location="Nécrolimbe">
+        Après avoir reçu Torrent, se rendre à l'église d'Elleh de nuit et parler à Ranni la sorcière, qui se présente alors comme de Renna la sorcière, pour obtenir la Cloche mande-esprit et les Cendres de loups solitaires.
+	</quest>
+    <quest id="ran1" npc="Ranni la sorcière" location="Liurnia, contrée lacustre">
+        Parler à Ranni la sorcière au sommet de la Tour de pierre d'éclat de Ranni, accessible après avoir vaincu le chevalier royal Loretta au manoir de Caria.
+	</quest>
+    <!-- Quête de Ranni la sorcière : FIN -->
 </quests>
 `;
