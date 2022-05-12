@@ -43,17 +43,5 @@ var XMLString = `
 		Parler une dernière fois Varré le Blême vers la sortie de la grande salle, près du site de grâce centre du Mausolée de la dynastie.
 	</quest>
 	<!-- Quête de Varré le Blême : FIN -->
-	<quest id="yur1" npc="Yura, chasseur de Doigts crochus" location="Nécrolimbe" link="">
-	</quest>
-	<quest id="yur2" npc="Yura, chasseur de Doigts crochus" location="Nécrolimbe" link="">
-	</quest>
-	<quest id="yur3" npc="Yura, chasseur de Doigts crochus" location="Nécrolimbe" link="">
-	</quest>
-	<quest id="yur4" npc="Yura, chasseur de Doigts crochus" location="Nécrolimbe" link="">
-	</quest>
-	<quest id="gow1" npc="Gowry le Sage" location="Caelid" link="">
-	</quest>
-	<quest id="gow2" npc="Gowry le Sage" location="Caelid" link="">
-	</quest>
 </quests>
 `;

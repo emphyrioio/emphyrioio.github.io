@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
     <script src="./quests.js"></script>
-    <title>Elden Ring - Journal de quêtes</title>
+    <link href="styles.css" rel="stylesheet">
+    <title>ELDEN RING - JOURNAL DE QUÊTES</title>
 </head>
 
 <body onload="load_()">
-    <h1>Elden Ring - Journal de quêtes</h1>
+    <h1>ELDEN RING - JOURNAL DE QUÊTES</h1>
     <select id="sort-selector" onChange="changeOrder()">
         <option>Trier par PNJ</option>
         <option>Trier par lieu</option>
-    </select><br />
+    </select><br/><br/>
     <div id="quests-container"></div>
     <script>
         // Fonction de chargement de la page.
@@ -93,7 +93,7 @@
             let y = 0;
 
             primaryArray.forEach(primary => {
-                HTMLResult += "<details id=\"details-level1-" + y + "\" ontoggle=\"save_details(this.id)\"><summary>" + primary + "</summary>";
+                HTMLResult += "<details id=\"details-level1-" + y + "\" ontoggle=\"save_details(this.id)\"><summary class=\"details-level1\">" + primary + "</summary>";
 
                 let u = 0;
                 secondaryArray.forEach(secondary => {
@@ -103,7 +103,7 @@
                     let quests = XMLParsed.querySelectorAll(selector);
 
                     if (quests.length > 0) {
-                        HTMLResult += "<details id=\"details-level2-" + y + "-" + u + "\" class=\"retrait\" ontoggle=\"save_details(this.id)\"><summary>" + secondary + "</summary>";
+                        HTMLResult += "<details id=\"details-level2-" + y + "-" + u + "\" class=\"retrait\" ontoggle=\"save_details(this.id)\"><summary class=\"details-level2\">" + secondary + "</summary>";
 
                         for (i = 0; i < quests.length; i++) {
                             let id = quests[i].getAttribute("id");
