@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="./quests.js"></script>
+    <title>Elden Ring - Journal de quêtes</title>
+</head>
+
+<body onload="load_()">
+    <h1>Elden Ring - Journal de quêtes</h1>
+    <select id="sort-selector" onChange="changeOrder()">
+        <option>Trier par PNJ</option>
+        <option>Trier par lieu</option>
+    </select><br />
+    <div id="quests-container"></div>
+    <script>
+        // Fonction de chargement de la page.
+        function load_(sortFlag = 0) {
+            const parser = new DOMParser();
+            const XMLJournal = parser.parseFromString(XMLString, "application/xml");
+
+            const errorNode = XMLJournal.querySelector("parsererror");
+
+            if (errorNode) {
+                console.log("error while parsing");
+            } else {
+                // Drapeau de tri des quêtes.
+                // 0 : tri par personnage puis par lieu. Par défaut.
+                // 1 : tri par lieu puis par personnage.
+                var sortSelector = document.getElementById("sort-selector");
+                const sortFlag = localStorage.getItem(sortSelector.id);
+                sortSelector.selectedIndex = sortFlag === null ? 0 : sortFlag;
+                var questsSort = sortFlag;
+
+                // Tableau des PNJ.
+                var npcs = [];
+
+                // Tableau des lieux.
+                var locations = [];
+
+                // Récupération des quêtes XML.
+                var XMLQuests = XMLJournal.querySelectorAll("quest");
+
+                for (i = 0; i < XMLQuests.length; i++) {
+                    // Construction du tableau des PNJs.
+                    if (!npcs.includes(XMLQuests[i].getAttribute("npc"))) {
+                        npcs.push(XMLQuests[i].getAttribute("npc"));
+                    }
+
+                    // Construction du tableau des lieux.
+                    if (!locations.includes(XMLQuests[i].getAttribute("location"))) {
+                        locations.push(XMLQuests[i].getAttribute("location"));
+                    }
+                }
+
+                // Tri du tableaux des PNJs par ordre alphabétique.
+                npcs.sort();
+
+                // Constructions du journal HTML.
+                if (questsSort == 0) {
+                    document.getElementById("quests-container").innerHTML = HTMLQuests(npcs, locations, XMLJournal);
+                }
+                else {
+                    document.getElementById("quests-container").innerHTML = HTMLQuests(locations, npcs, XMLJournal);
+                }
+
+                // Chargement de l'état des checkboxes.
+                var checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+                for (i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = localStorage.getItem(checkboxes[i].id) === 'true' ? true : false;
+
+                }
+
+                // Chargement de l'état des sections.
+                const details = document.querySelectorAll('details');
+
+                for (i = 0; i < details.length; i++) {
+                    details[i].open = localStorage.getItem(details[i].id) === 'true' ? true : false;
+
+                }
+
+            }
+            // Mise en forme des labels des ckeckboxes cochés.
+            lineThrough();
+        }
+
+        // Fonction permettant de générer le code HTML et de trier les quêtes en fonction d'un critère principal et d'un critère secondaire.
+        function HTMLQuests(primaryArray, secondaryArray, XMLParsed) {
+            let HTMLResult = "";
+            let y = 0;
+
+            primaryArray.forEach(primary => {
+                HTMLResult += "<details id=\"details-level1-" + y + "\" ontoggle=\"save_details(this.id)\"><summary>" + primary + "</summary>";
+
+                let u = 0;
+                secondaryArray.forEach(secondary => {
+                    let selector = "quest[npc=\'" + primary.replace(/"/g, '\\\"') + "\'][location=\'" + secondary.replace(/"/g, '\\\"') + "\']";
+                    selector += ",quest[location=\'" + primary.replace(/"/g, '\\\"') + "\'][npc=\'" + secondary.replace(/"/g, '\\\"') + "\']";
+
+                    let quests = XMLParsed.querySelectorAll(selector);
+
+                    if (quests.length > 0) {
+                        HTMLResult += "<details id=\"details-level2-" + y + "-" + u + "\" class=\"retrait\" ontoggle=\"save_details(this.id)\"><summary>" + secondary + "</summary>";
+
+                        for (i = 0; i < quests.length; i++) {
+                            let id = quests[i].getAttribute("id");
+                            let inner = quests[i].textContent;
+                            HTMLResult += "<input type=\"checkbox\" class=\"retrait1\" id=\"" + id + "\" onclick=\"save_checkbox(this.id)\">";
+                            HTMLResult += "<label for=\"" + id + "\">" + inner + "</label><br/>";
+                        }
+
+                        HTMLResult += "</details>";
+                        u++;
+                    }
+                });
+
+                HTMLResult += "</details>";
+                y++;
+            });
+
+            return HTMLResult;
+        }
+
+        // Fonction d'enregistrement de l'état des checkboxes.
+        function save_checkbox(checkbox_id) {
+            const checkbox = document.getElementById(checkbox_id);
+            localStorage.setItem(checkbox.id, checkbox.checked);
+            lineThrough();
+        }
+
+        // Fonction d'enregistrement de l'état des sections.
+        function save_details(details_id) {
+            const details = document.getElementById(details_id);
+            localStorage.setItem(details.id, details.open);
+        }
+
+        // Modification de l'ordre de tri.
+        function changeOrder() {
+            const sortSelector = document.getElementById("sort-selector");
+            const selIndex = sortSelector.selectedIndex;
+            questsSort = selIndex == 0 ? 0 : 1;
+            localStorage.setItem(sortSelector.id, questsSort);
+            load_();
+        }
+
+        // Fonction pour barrer les quêtes cochées.
+        function lineThrough() {
+            var checkboxesChecked = document.querySelectorAll("input[type='checkbox']:checked");
+
+            for (i = 0; i < checkboxesChecked.length; i++) {
+                var label = document.querySelector("label[for='" + checkboxesChecked[i].getAttribute("id") + "']");
+                label.style.textDecoration = "line-through";
+            }
+
+            var checkboxesUnchecked = document.querySelectorAll("input[type='checkbox']:not(:checked)");
+
+            for (i = 0; i < checkboxesUnchecked.length; i++) {
+                var label = document.querySelector("label[for='" + checkboxesUnchecked[i].getAttribute("id") + "']");
+                label.style.textDecoration = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
