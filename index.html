@@ -91,7 +91,6 @@
                     details[i].open = localStorage.getItem(details[i].id) === 'true' ? true : false;
 
                 }
-
             }
             // Mise en forme des labels des ckeckboxes cochés.
             lineThrough();
@@ -106,7 +105,7 @@
             let y = 0;
 
             primaryArray.forEach(primary => {
-                HTMLResult += "<details id=\"details-level1-" + y + "\" ontoggle=\"save_details(this.id)\"><summary class=\"details-level1\">" + primary + "</summary>";
+                HTMLResult += "<details id=\"details-level1-" + y + "\" ontoggle=\"save_details(this.id);addLinksOnOpen(this.id)\"><summary class=\"details-level1\">" + primary + "</summary>";
 
                 let u = 0;
                 secondaryArray.forEach(secondary => {
@@ -116,7 +115,7 @@
                     let quests = XMLParsed.querySelectorAll(selector);
 
                     if (quests.length > 0) {
-                        HTMLResult += "<details id=\"details-level2-" + y + "-" + u + "\" class=\"retrait\" ontoggle=\"save_details(this.id)\"><summary class=\"details-level2\">" + secondary + "</summary>";
+                        HTMLResult += "<details id=\"details-level2-" + y + "-" + u + "\" class=\"retrait\" ontoggle=\"save_details(this.id);addLinksOnOpen(this.id);\"><summary class=\"details-level2\">" + secondary + "</summary>";
 
                         for (i = 0; i < quests.length; i++) {
                             let id = quests[i].getAttribute("id");
@@ -148,6 +147,15 @@
         function save_details(details_id) {
             const details = document.getElementById(details_id);
             localStorage.setItem(details.id, details.open);
+
+        }
+
+        // Fonction pour insérer les lients à chaque dépliage de details.
+        function addLinksOnOpen(details_id) {            
+            const details = document.getElementById(details_id);
+            if (details.open) {
+                addLinks(linksTable);
+            }
         }
 
         // Modification de l'ordre de tri.
