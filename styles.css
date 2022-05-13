@@ -1,24 +1,38 @@
 body {
-
+	font-family: "Spectral", 'fallback', Helvetica, Arial, sans-serif;
+	background-color: grey;
+	color: #e9e9e8;
+	background-image: url(https://static.bandainamcoent.eu/high/elden-ring/elden-ring/00-page-setup/elden-ring-new-header-mobile.jpg);
+	line-height: 1.4em;
+	font-size: 1em;
 }
+
+#quests-container {
+	background-color: rgb(3, 3, 3);
+	opacity: 0.55;
+	padding: 1em;
+	padding-bottom: 2em;
+}
+
 .retrait {
-	margin-left:1em;
+	margin-left: 1em;
 }
 
 .retrait1 {
-	margin-left:1.5em;
+	margin-left: 1.5em;
 }
 
-.bold
-{
-	font-weight: bold;	
-}
-
-.details-level1{
-	color: rgb(65, 65, 65);
+.bold {
 	font-weight: bold;
 }
 
-.details-level2{
-	color: black;
+.details-level1 {
+	/*font-weight: bold;*/
+	font-size: 1.3em;
+	text-decoration: underline;
+}
+
+.details-level2 {
+	font-size: 1.2em;
+	text-decoration: underline;
 }

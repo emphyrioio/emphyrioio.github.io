@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <script src="./quests.js"></script>
-    <link href="styles.css" rel="stylesheet">
-    <title>ELDEN RING - JOURNAL DE QUÊTES</title>
+    <script src="./external-links.js"></script>
+    <link rel="image_src" href="https://static.bandainamcoent.eu/high/elden-ring/elden-ring/00-page-setup/elden-ring-new-header-mobile.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <title>ELDEN RING - JOURNAL DE QUÊTES (version alpha)</title>
 </head>
 
 <body onload="load_()">
-    <h1>ELDEN RING - JOURNAL DE QUÊTES</h1>
+    <h2>ELDEN RING - JOURNAL DE QUÊTES</h2>
     <select id="sort-selector" onChange="changeOrder()">
         <option>Trier par PNJ</option>
         <option>Trier par lieu</option>
-    </select><br/><br/>
+    </select><br /><br />
     <div id="quests-container"></div>
     <script>
         // Fonction de chargement de la page.
-        function load_(sortFlag = 0) {
+        function load_() {
             const parser = new DOMParser();
             const XMLJournal = parser.parseFromString(XMLString, "application/xml");
 
@@ -32,7 +34,7 @@
                 var sortSelector = document.getElementById("sort-selector");
                 const sortFlag = localStorage.getItem(sortSelector.id);
                 sortSelector.selectedIndex = sortFlag === null ? 0 : sortFlag;
-                var questsSort = sortFlag;
+                var questsSort = sortFlag === null ? 0 : sortFlag;
 
                 // Tableau des PNJ.
                 var npcs = [];
@@ -85,6 +87,9 @@
             }
             // Mise en forme des labels des ckeckboxes cochés.
             lineThrough();
+
+            // Génération des liens.
+            addLinks(linksTable);
         }
 
         // Fonction permettant de générer le code HTML et de trier les quêtes en fonction d'un critère principal et d'un critère secondaire.
@@ -160,6 +165,28 @@
             for (i = 0; i < checkboxesUnchecked.length; i++) {
                 var label = document.querySelector("label[for='" + checkboxesUnchecked[i].getAttribute("id") + "']");
                 label.style.textDecoration = "none";
+            }
+        }
+
+        // Fonction pour ajouter des liens.
+        function addLinks(_linksArray) {
+            let labels = document.querySelectorAll("input[type='checkbox'] + label");
+            
+            for (i = 0; i < labels.length; i++) {
+                _linksArray.forEach(item => {
+                    let itemName = item[0];
+                    let itemLink = item[1];
+
+                    if (labels[i].innerText.includes(itemName)) {
+
+                        labels[i].innerHTML = labels[i].innerHTML.replace(
+                            itemName,
+                            "<a href=\"" + itemLink + "\" target=\"_blank\">" + itemName + "</a>"
+                        );
+                        console.log("<a href=\"" + itemLink + "\" target=\"_blank\">" + itemName + "</a>"); //*******************************
+                    }
+
+                });
             }
         }
     </script>
