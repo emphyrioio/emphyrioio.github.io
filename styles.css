@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'Garamond Premier Pro';
+	src: url('GaramondPremrPro') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	font-family: "Spectral", 'fallback', Helvetica, Arial, sans-serif, 'Lora', serif;
 	background-color: grey;
@@ -8,7 +15,7 @@ body {
 }
 
 .titre1 {
-	font-family: 'Lora', serif;
+	font-family: 'GaramondPremrPro', serif;/*'Lora', serif;*/
 	font-weight: normal;
 }
 
