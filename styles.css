@@ -9,6 +9,9 @@ body {
 	font-family: "Spectral", 'fallback', Helvetica, Arial, sans-serif, 'Garamond Premier Pro', 'Lora', serif;
 	color: white;
 	background-image: url(https://static.bandainamcoent.eu/high/elden-ring/elden-ring/00-page-setup/elden-ring-new-header-mobile.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
 	line-height: 1.4em;
 }
 
