@@ -1,0 +1,27 @@
+- quest: "Quelle est le nom de cette forme géométrique ?"
+  img: "images/pngegg.png"
+  responses:
+    - resp: "Héxagone."
+      val: true
+    - resp: "Pintagone."
+      val: false
+    - resp: "Triangle."
+      val: false
+- quest: "Quelle est le nom de cette forme géométrique ?"
+  img: "images/cilindre.png"
+  responses:
+    - resp: "Cilindre."
+      val: true
+    - resp: "Cube."
+      val: false
+    - resp: "Pyramide."
+      val: false
+- quest: "Quelle est le nom de cette forme géométrique ?"
+  img: "images/sphere.png"
+  responses:
+    - resp: "Sphère."
+      val: true
+    - resp: "Prisme."
+      val: false
+    - resp: "Pavé droit."
+      val: false

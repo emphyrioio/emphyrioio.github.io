@@ -26,6 +26,16 @@
 
                 const questionTitle = document.createElement('h5');
                 questionTitle.textContent = `${index + 1}. ${item.quest} 🐰`;
+
+                if (item.img) {
+                    const questionImg = document.createElement('img');
+                    questionImg.src = item.img;
+                    questionImg.alt = "Illustration de la question";
+                    questionImg.style.maxWidth = "100px";
+                    questionImg.classList.add('img-fluid', 'mt-2');
+                    questionTitle.appendChild(questionImg)
+                }
+
                 questionDiv.appendChild(questionTitle);
 
                 // Shuffle the responses for each question
@@ -139,7 +149,7 @@
 
             // If no parameter is provided, use a default YAML file
             if (!yamlFile) {
-                yamlFile = 'qcm1.yaml'; // Default file name
+                yamlFile = 'qcm1'; // Default file name
             }
 
             // Prefix the yaml/ directory to the file path

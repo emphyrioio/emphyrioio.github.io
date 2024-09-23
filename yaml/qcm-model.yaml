@@ -1,0 +1,8 @@
+- quest: "Question ?"
+  responses:
+    - resp: "Réponse A."
+      val: true
+    - resp: "Réponse B."
+      val: false
+    - resp: "Réponse C."
+      val: false
