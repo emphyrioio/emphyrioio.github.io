@@ -2,13 +2,14 @@
 <html lang="fr">
 
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questions pour Enfants</title>
-    <!-- Bootstrap CDN -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu des Questions</title>
+    <!-- Include Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f1eeee;
+            background-color: #f9f7f1;
         }
 
         .container {
@@ -109,7 +110,7 @@
         <h1 class="text-center mb-4">Jeu des Questions 🎉</h1>
 
         <div class="card p-4 shadow-sm" id="questions-container">
-            <!-- Questions -->
+            <!-- Questions will be displayed here -->
         </div>
     </div>
 
@@ -127,20 +128,26 @@
                     <img id="success-image" src="images/pibby.png" alt="Succès !" width="150px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="resetPage()">Valider</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Inclusion de Bootstrap JS -->
+    <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclusion de js-yaml -->
+    <!-- Include js-yaml -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <!-- Confetti animation -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
+        // Function to get URL parameters
+        function getURLParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
         // Function to shuffle an array (Fisher-Yates Shuffle Algorithm)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -150,7 +157,7 @@
             return array;
         }
 
-        // Function to display the questions and answers in random order
+        // Function to display questions and answers in random order
         function displayQuestions(data) {
             const container = document.getElementById('questions-container');
 
@@ -228,7 +235,7 @@
             const scoreElement = document.getElementById('score');
             scoreElement.textContent = score;
 
-            // Change score text color based on value
+            // Change the color of the score based on value
             if (score > 0) {
                 scoreBox.style.color = 'green';
             } else if (score < 0) {
@@ -240,7 +247,7 @@
             // Check if all answers are correct
             if (score === totalQuestions) {
                 triggerConfetti();
-                showCongratsModal(); // Show modal with congratulations
+                showCongratsModal(); // Show congratulations modal
             }
         }
 
@@ -253,12 +260,12 @@
             });
         }
 
-        // Function to show congratulations modal
+        // Function to show the congratulations modal
         function showCongratsModal() {
             const modalElement = document.getElementById('confettiModal');
             const modal = new bootstrap.Modal(modalElement);
 
-            // Add event listener to refresh page when modal is closed
+            // Add an event listener to refresh the page when the modal is closed
             modalElement.addEventListener('hidden.bs.modal', resetPage);
 
             modal.show();
@@ -269,18 +276,38 @@
             window.location.reload(); // Reload the page to reset everything
         }
 
-        // Fetch and load the YAML file
+        // Function to load the YAML file
         function loadYAML() {
-            fetch('qcm2.yaml')
-                .then(response => response.text())
+            // Get the YAML file name from the URL parameters
+            let yamlFile = getURLParameter('yaml');
+
+            // If no parameter is provided, use a default YAML file
+            if (!yamlFile) {
+                yamlFile = 'qcm1.yaml'; // Default file name
+            }
+
+            // Prefix the yaml/ directory to the file path
+            yamlFile = `yaml/${yamlFile}.yaml`;
+
+            fetch(yamlFile)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP Error ' + response.status);
+                    }
+                    return response.text();
+                })
                 .then(yamlText => {
                     const data = jsyaml.load(yamlText);
                     displayQuestions(data);
                 })
-                .catch(error => console.error('Erreur de chargement du fichier YAML:', error));
+                .catch(error => {
+                    console.error('Error loading YAML file:', error);
+                    // Display an error message to the user
+                    document.getElementById('questions-container').innerHTML = '<p class="text-danger">Unable to load the questionnaire. Please check the YAML file name.</p>';
+                });
         }
 
-        // Load the questions when the page loads
+        // Load the questions when the page is ready
         document.addEventListener('DOMContentLoaded', () => {
             loadYAML();
 
@@ -291,7 +318,6 @@
                 }
             });
         });
-
     </script>
 
     <div class="container text-center mt-4">
