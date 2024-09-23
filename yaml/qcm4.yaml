@@ -1,0 +1,24 @@
+- quest: "Que signifie le mot \"géométrie\" ?"
+  responses:
+    - resp: "Mesurer la terre."
+      val: true
+    - resp: "Dessiner la terre."
+      val: false
+    - resp: "Calculer."
+      val: false
+- quest: "Que signifie le mot \"polygone\" ?"
+  responses:
+    - resp: "Beaucoup de côtes en grec."
+      val: true
+    - resp: "Beaucoup de faces en latin."
+      val: false
+    - resp: "Forme en grec."
+      val: false
+- quest: "Que signifie le mot \"polyèdre\" ?"
+  responses:
+    - resp: "Beaucoup de faces en grec."
+      val: true
+    - resp: "Beaucoup de côtés en latin."
+      val: false
+    - resp: "Forme en 3D en anglais."
+      val: false
