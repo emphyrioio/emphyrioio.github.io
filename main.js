@@ -126,13 +126,44 @@
             });
         }
 
+        // List of YouTube videos provided by the user
+        const youtubeVideos = [
+            "https://www.youtube.com/shorts/KwZeQxr2BkY",
+            "https://www.youtube.com/shorts/uVzwlydUtqg",
+            "https://www.youtube.com/shorts/iZkypDqJOh8",
+            "https://www.youtube.com/shorts/309cbj6UiMc",
+            "https://www.youtube.com/shorts/EJuLacBSjC4",
+            "https://www.youtube.com/shorts/u-OHwTMajC4",
+            "https://youtube.com/watch?v=Z_93y3QeyoI",
+            "https://www.youtube.com/shorts/2xSB4xgTiIg",
+            "https://www.youtube.com/shorts/ewcJcxCEE3g",
+            "https://www.youtube.com/shorts/u-OHwTMajC4"
+        ];
+
+        // Function to get a random YouTube video URL from the list
+        function getRandomYoutubeVideo() {
+            const randomIndex = Math.floor(Math.random() * youtubeVideos.length);
+            return youtubeVideos[randomIndex];
+        }
+
         // Function to show the congratulations modal
         function showCongratsModal() {
             const modalElement = document.getElementById('confettiModal');
             const modal = new bootstrap.Modal(modalElement);
+            const modalBody = modalElement.querySelector('.modal-body');
+            const randomVideoUrl = getRandomYoutubeVideo();
+            const videoLink = document.createElement('a');
 
             // Add an event listener to refresh the page when the modal is closed
             modalElement.addEventListener('hidden.bs.modal', resetPage);
+            
+            /* videoLink.href = randomVideoUrl;
+            videoLink.target = '_blank'; // Open in new tab
+            videoLink.textContent = 'Voici ta récompense !';
+            videoLink.classList.add('btn', 'btn-danger', 'mt-3'); // Add Bootstrap classes for styling */
+        
+            // Append the link to the modal body
+            /* modalBody.appendChild(videoLink); */
 
             modal.show();
         }
