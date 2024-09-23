@@ -9,9 +9,9 @@
 
 - quest: "Où a-t-on inventé l'écriture ?"
   responses:
-    - resp: "En Egypte et en Mésopotamie."
+    - resp: "En Égypte et en Mésopotamie."
       val: true
-    - resp: "Aux Etats-Unis d'Amérique."
+    - resp: "Aux États-Unis d'Amérique."
       val: false
     - resp: "En France."
       val: false

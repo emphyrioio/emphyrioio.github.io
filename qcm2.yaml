@@ -1,0 +1,26 @@
+- quest: "Qu'est-ce que l'Histoire ?"
+  responses:
+    - resp: "Les choses importantes des époques passées."
+      val: true
+    - resp: "Une histoire qu'on raconte aux enfants pour s'endormir."
+      val: false
+    - resp: "L'époque où on ne savait pas écrire."
+      val: false
+
+- quest: "Quand a commencé l'Histoire ?"
+  responses:
+    - resp: "Avec l'invention de l'écriture."
+      val: true
+    - resp: "Avec la fin des dinosaures."
+      val: false
+    - resp: "Elle n'a pas encore commencé."
+      val: false
+
+- quest: "Qu'est-ce qui fait partie de l'Histoire ?"
+  responses:
+    - resp: "La fin de la Yougoslavie."
+      val: true
+    - resp: "Aller manger au McDo."
+      val: false
+    - resp: "Se brosser les dents."
+      val: false
