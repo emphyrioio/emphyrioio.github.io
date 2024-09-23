@@ -1,0 +1,26 @@
+- quest: "Quand a commencé la Préhistoire ?"
+  responses:
+    - resp: "Il y a 7 millions d'années."
+      val: true
+    - resp: "Il y a -3500 ans."
+      val: false
+    - resp: "En 2024."
+      val: false
+
+- quest: "Où a-t-on inventé l'écriture ?"
+  responses:
+    - resp: "En Egypte et en Mésopotamie."
+      val: true
+    - resp: "Aux Etats-Unis d'Amérique."
+      val: false
+    - resp: "En France."
+      val: false
+
+- quest: "Quel est le plus vieil ancêtre de l'Homme ?"
+  responses:
+    - resp: "Toumaï."
+      val: true
+    - resp: "Mickey."
+      val: false
+    - resp: "Jésus."
+      val: false
