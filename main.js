@@ -183,6 +183,14 @@
                 yamlFile = 'qcm1'; // Default file name
             }
 
+            // Validate the file name to allow only alphanumeric characters, dashes, and underscores
+            const isValidFileName = /^[a-zA-Z0-9_-]+$/.test(yamlFile);
+            if (!isValidFileName) {
+                console.error('Invalid file name provided.');
+                document.getElementById('questions-container').innerHTML = '<p class="text-danger">Invalid file name. Please check the URL.</p>';
+                return;
+            }
+
             // Prefix the yaml/ directory to the file path
             yamlFile = `yaml/${yamlFile}.yaml`;
 
