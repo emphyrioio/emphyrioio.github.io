@@ -10,7 +10,7 @@
   responses:
     - resp: "Sortir de l'œuf chez les animaux ovipares."
       val: true
-    - resp: "Le naissance d'un bébé chez les animaux ovipares."
+    - resp: "Le naissance d'un bébé chez les animaux vivipares."
       val: false
     - resp: "Exploser."
 - quest: "Comment s'appellent les animaux qui sortent du vendre de leur mère ?"
