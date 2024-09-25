@@ -1,0 +1,24 @@
+- quest: "Que veut dire un animal \"ovipare\" ?"
+  responses:
+    - resp: "Un animal qui naît en sortant d'un œuf pondu par sa mère."
+      val: true
+    - resp: "Un animal qui naît en sortant d'un œuf pondu par son père."
+      val: false
+    - resp: "Un animal qui naît en sortant du ventre de sa mère."
+      val: false
+- quest: "Que veut dire un animal \"vivipare\" ?"
+  responses:
+    - resp: "Un animal qui naît en sortant du ventre de sa mère."
+      val: true
+    - resp: "Un animal qui naît en sortant de sous la terre."
+      val: false
+    - resp: "Un animal qui naît en sortant d'un œuf pondu par sa mère."
+      val: false
+- quest: "Que veut dire un animal \"mammifère\" ?"
+  responses:
+    - resp: "Un animal qui a des mamelles pour allaiter ses petits."
+      val: true
+    - resp: "Un animal qui mange ses petits."
+      val: false
+    - resp: "Un animal qui mange des vers de terre."
+      val: false

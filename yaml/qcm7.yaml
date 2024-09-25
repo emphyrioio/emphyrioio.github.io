@@ -1,0 +1,23 @@
+- quest: "Que veut dire la \"mise-bas\" (mettre bas) ?"
+  responses:
+    - resp: "Le naissance d'un bébé chez les animaux vivipares."
+      val: true
+    - resp: "Le naissance d'un bébé chez les animaux ovipares."
+      val: false
+    - resp: "Descendre un escalier."
+      val: false
+- quest: "Que veut dire \"l'éclosion\" (éclore) ?"
+  responses:
+    - resp: "Sortir de l'œuf chez les animaux ovipares."
+      val: true
+    - resp: "Le naissance d'un bébé chez les animaux ovipares."
+      val: false
+    - resp: "Exploser."
+- quest: "Comment s'appellent les animaux qui sortent du vendre de leur mère ?"
+  responses:
+    - resp: "Des animaux vivipares."
+      val: true
+    - resp: "Des animaux ovipares."
+      val: false
+    - resp: "Des animagus."
+      val: false

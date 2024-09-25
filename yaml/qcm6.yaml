@@ -1,0 +1,48 @@
+- quest: "L'âne est un animal :"
+  responses:
+    - resp: "Vivipare."
+      val: true
+    - resp: "Ovipare."
+      val: false
+- quest: "Le cheval est un animal :"
+  responses:
+    - resp: "Vivipare."
+      val: true
+    - resp: "Ovipare."
+      val: false
+- quest: "Le chien est un animal :"
+  responses:
+    - resp: "Vivipare."
+      val: true
+    - resp: "Ovipare."
+      val: false
+- quest: "Le loup est un animal :"
+  responses:
+    - resp: "Vivipare."
+      val: true
+    - resp: "Ovipare."
+      val: false
+- quest: "La pintade est un animal :"
+  responses:
+    - resp: "Ovipare."
+      val: true
+    - resp: "Vivipare."
+      val: false
+- quest: "La coccinelle est un animal :"
+  responses:
+    - resp: "Ovipare."
+      val: true
+    - resp: "Vivipare."
+      val: false
+- quest: "Le saumon est un animal :"
+  responses:
+    - resp: "Ovipare."
+      val: true
+    - resp: "Vivipare."
+      val: false
+- quest: "La tortue est un animal :"
+  responses:
+    - resp: "Ovipare."
+      val: true
+    - resp: "Vivipare."
+      val: false
