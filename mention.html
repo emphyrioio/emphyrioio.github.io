@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générer un DOCX</title>
     <script type="module">
-        import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType } from "https://cdn.jsdelivr.net/npm/docx@8.2.2/+esm";
+        import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType, BorderStyle } from "https://cdn.jsdelivr.net/npm/docx@8.2.2/+esm";
 
         window.generateDocx = async function () {
             let params = getQueryParams();
@@ -33,20 +33,20 @@
 
             // Création d'un tableau à cellule unique contenant le texte
             const table = new Table({
-                borders: {
-                  top: {style: BorderStyle.THICK},
-                  bottom: {style: BorderStyle.THICK},
-                  left: {style: BorderStyle.THICK},
-                  right: {style: BorderStyle.THICK},
-                },
-                width: { size: 4000, type: WidthType.DXA },
+                width: { size: 3500, type: WidthType.DXA }, // Largeur de 350px (~3500 DXA)
+                alignment: AlignmentType.CENTER, // Centre le tableau sur la page
                 rows: [
                     new TableRow({
                         children: [
                             new TableCell({
                                 width: { size: 3500, type: WidthType.DXA },
                                 margins: { top: 200, bottom: 200, left: 200, right: 200 },
-                                borders: { top: { size: 3 }, bottom: { size: 3 }, left: { size: 3 }, right: { size: 3 } },
+                                borders: {
+                                    top: { size: 3, style: BorderStyle.SINGLE, color: "000000" },
+                                    bottom: { size: 3, style: BorderStyle.SINGLE, color: "000000" },
+                                    left: { size: 3, style: BorderStyle.SINGLE, color: "000000" },
+                                    right: { size: 3, style: BorderStyle.SINGLE, color: "000000" }
+                                },
                                 children: paragraphs,
                             }),
                         ],
