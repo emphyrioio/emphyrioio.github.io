@@ -3,67 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certification de signature</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: justify;
-            padding: 20px;
-            background-color: #f8f8f8;
-        }
-        .container {
-            border: 2px solid black;
-            padding: 15px;
-            max-width: 350px;
-            margin: auto;
-            border-radius: 5px;
-            background-color: white;
-        }
-        h2 {
-            font-size: 14px;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .dossier {
-            text-align: center;
-            font-size: 13px;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        p {
-            font-size: 12px;
-            margin: 5px 0;
-        }
-        .bold {
-            font-weight: bold;
-        }
-    </style>
+    <title>Générer un DOCX</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
 </head>
 <body>
-<div>
-    <table class="container bold"><tr><td>
-        <h2>Certification de signature</h2>
-        <p class="dossier">Dossier n° <span id="num_aff"></span></p>
 
-        <p>
-            Le Notaire soussigné certifie la signature de <span class="bold" id="civ"></span> 
-            <span class="bold" id="first_name"></span> <span class="bold" id="last_name"></span> 
-            au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.
-        </p>
+    <h2>Génération du document Word</h2>
+    <button onclick="generateDocx()">Télécharger le DOCX</button>
 
-        <p>
-            Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.
-        </p>
-
-        <p>
-            Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974.
-        </p>
-        <br>
-        <p>Fait à <span class="bold">CROISSY-SUR-SEINE</span> (France)</p>
-        <p>Le <span id="date"></span></p>
-    </td></tr></table>
-</div>
     <script>
         function getQueryParams() {
             let params = {};
@@ -85,17 +32,53 @@
             return date.toLocaleDateString("fr-FR", options);
         }
 
-        function fillData() {
+        async function generateDocx() {
             let params = getQueryParams();
-            
-            document.getElementById("num_aff").textContent = params.num_aff || "XXXXXX";
-            document.getElementById("civ").textContent = params.civ || "M./Mme";
-            document.getElementById("first_name").textContent = params.first_name || "Prénom";
-            document.getElementById("last_name").textContent = params.last_name || "Nom";
-            document.getElementById("date").textContent = formatDate(new Date());
-        }
 
-        window.onload = fillData;
+            let num_aff = params.num_aff || "XXXXXX";
+            let civ = params.civ || "M./Mme";
+            let first_name = params.first_name || "Prénom";
+            let last_name = params.last_name || "Nom";
+            let date = formatDate(new Date());
+
+            const { Document, Packer, Paragraph, TextRun } = window.docx;
+
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new Paragraph({
+                            alignment: "center",
+                            children: [new TextRun({ text: "CERTIFICATION DE SIGNATURE", bold: true, size: 24 })]
+                        }),
+                        new Paragraph({
+                            alignment: "center",
+                            children: [new TextRun({ text: `Dossier n° ${num_aff}`, bold: true, underline: true, size: 20 })]
+                        }),
+                        new Paragraph(""),
+                        new Paragraph(`Le Notaire soussigné certifie la signature de ${civ} ${first_name} ${last_name} au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.`),
+                        new Paragraph(""),
+                        new Paragraph("Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document."),
+                        new Paragraph(""),
+                        new Paragraph("Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974."),
+                        new Paragraph(""),
+                        new Paragraph({
+                            children: [new TextRun({ text: "Fait à CROISSY-SUR-SEINE (France)", bold: true })]
+                        }),
+                        new Paragraph({
+                            children: [new TextRun({ text: `Le ${date}`, bold: true })]
+                        }),
+                    ]
+                }]
+            });
+
+            const blob = await Packer.toBlob(doc);
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `Certification_${num_aff}.docx`;
+            link.click();
+        }
     </script>
 
 </body>
