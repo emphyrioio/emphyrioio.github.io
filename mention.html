@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification de signature</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: justify;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            border: 2px solid black;
+            padding: 15px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 5px;
+            background-color: white;
+        }
+        h2 {
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .dossier {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        p {
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .date-box {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 3px 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Certification de signature</h2>
+        <p class="dossier">Dossier n° <span id="num_aff"></span></p>
+
+        <p>
+            Le Notaire soussigné certifie la signature de <span class="bold" id="civ"></span> 
+            <span class="bold" id="first_name"></span> <span class="bold" id="last_name"></span> 
+            au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.
+        </p>
+
+        <p>
+            Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.
+        </p>
+
+        <p>Fait à <span class="bold">CROISSY-SUR-SEINE</span> (France)</p>
+        <p>Le <span class="date-box" id="date"></span></p>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            let params = {};
+            let queryString = window.location.search.substring(1);
+            let queryArray = queryString.split("&");
+
+            queryArray.forEach(param => {
+                let [key, value] = param.split("=");
+                if (key && value) {
+                    params[key] = decodeURIComponent(value.replace(/\+/g, " "));
+                }
+            });
+
+            return params;
+        }
+
+        function formatDate(date) {
+            const options = { day: "numeric", month: "long", year: "numeric" };
+            return date.toLocaleDateString("fr-FR", options);
+        }
+
+        function fillData() {
+            let params = getQueryParams();
+            
+            document.getElementById("num_aff").textContent = params.num_aff || "XXXXXX";
+            document.getElementById("civ").textContent = params.civ || "M./Mme";
+            document.getElementById("first_name").textContent = params.first_name || "Prénom";
+            document.getElementById("last_name").textContent = params.last_name || "Nom";
+            document.getElementById("date").textContent = formatDate(new Date()); // Date du jour
+        }
+
+        window.onload = fillData;
+    </script>
+
+</body>
+</html>
