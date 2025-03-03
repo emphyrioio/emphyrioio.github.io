@@ -33,7 +33,13 @@
 
             // Création d'un tableau à cellule unique contenant le texte
             const table = new Table({
-                width: { size: 3500, type: WidthType.DXA }, // Largeur de 350px (~3500 DXA)
+                borders: {
+                  top: {style: BorderStyle.THICK},
+                  bottom: {style: BorderStyle.THICK},
+                  left: {style: BorderStyle.THICK},
+                  right: {style: BorderStyle.THICK},
+                },
+                width: { size: 4000, type: WidthType.DXA },
                 rows: [
                     new TableRow({
                         children: [
