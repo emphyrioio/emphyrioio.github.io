@@ -38,12 +38,6 @@
         .bold {
             font-weight: bold;
         }
-        .date-box {
-            display: inline-block;
-            border: 1px solid black;
-            padding: 3px 6px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -62,8 +56,12 @@
             Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.
         </p>
 
+        <p>
+            Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974.
+        </p>
+
         <p>Fait à <span class="bold">CROISSY-SUR-SEINE</span> (France)</p>
-        <p>Le <span class="date-box" id="date"></span></p>
+        <p>Le <span id="date"></span></p>
     </div>
 
     <script>
@@ -94,7 +92,7 @@
             document.getElementById("civ").textContent = params.civ || "M./Mme";
             document.getElementById("first_name").textContent = params.first_name || "Prénom";
             document.getElementById("last_name").textContent = params.last_name || "Nom";
-            document.getElementById("date").textContent = formatDate(new Date()); // Date du jour
+            document.getElementById("date").textContent = formatDate(new Date());
         }
 
         window.onload = fillData;
