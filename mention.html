@@ -18,24 +18,17 @@
 
             // Création du contenu sous forme de paragraphes en gras
             const paragraphs = [
-                new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: "CERTIFICATION DE SIGNATURE", bold: true, size: 24 })],
-                }),
-                new Paragraph({
-                    alignment: AlignmentType.CENTER,
-                    children: [new TextRun({ text: `Dossier n° ${num_aff}`, bold: true, underline: true, size: 20 })],
-                }),
+                new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "CERTIFICATION DE SIGNATURE", bold: true, size: 24 })] }),
+                new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `Dossier n° ${num_aff}`, bold: true, underline: true, size: 20 })] }),
                 new Paragraph(""),
-                new Paragraph({ children: [new TextRun({ text: `Le Notaire soussigné certifie la signature de ${civ} ${first_name} ${last_name} au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.`, bold: true }) }),
+                new Paragraph({ children: [new TextRun({ text: `Le Notaire soussigné certifie la signature de ${civ} ${first_name} ${last_name} au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.`, bold: true })] }),
                 new Paragraph(""),
-                new Paragraph({ children: [new TextRun({ text: "Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.", bold: true }) }),
+                new Paragraph({ children: [new TextRun({ text: "Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.", bold: true })] }),
                 new Paragraph(""),
-                new Paragraph({ children: [new TextRun({ text: "Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974.", bold: true }) }),
+                new Paragraph({ children: [new TextRun({ text: "Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974.", bold: true })] }),
                 new Paragraph(""),
-                new Paragraph({ children: [new TextRun({ text: "Fait à CROISSY-SUR-SEINE (France)", bold: true }) }),
-                new Paragraph({ children: [new TextRun({ text: `Le ${date}`, bold: true }) }),
-                new Paragraph(""),
+                new Paragraph({ children: [new TextRun({ text: "Fait à CROISSY-SUR-SEINE (France)", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: `Le ${date}`, bold: true })] }),
             ];
 
             // Création d'un tableau à cellule unique contenant le texte
