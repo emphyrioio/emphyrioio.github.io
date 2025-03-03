@@ -5,37 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générer un DOCX</title>
     <script type="module">
-        import { Document, Packer, Paragraph, TextRun } from "https://cdn.jsdelivr.net/npm/docx@7.1.0/+esm";
-        window.docx = { Document, Packer, Paragraph, TextRun };
-    </script>
-</head>
-<body>
+        import { Document, Packer, Paragraph, TextRun } from "https://cdn.jsdelivr.net/npm/docx@8.2.2/+esm";
 
-    <h2>Génération du document Word</h2>
-    <button onclick="generateDocx()">Télécharger le DOCX</button>
-
-    <script>
-        function getQueryParams() {
-            let params = {};
-            let queryString = window.location.search.substring(1);
-            let queryArray = queryString.split("&");
-
-            queryArray.forEach(param => {
-                let [key, value] = param.split("=");
-                if (key && value) {
-                    params[key] = decodeURIComponent(value.replace(/\+/g, " "));
-                }
-            });
-
-            return params;
-        }
-
-        function formatDate(date) {
-            const options = { day: "numeric", month: "long", year: "numeric" };
-            return date.toLocaleDateString("fr-FR", options);
-        }
-
-        async function generateDocx() {
+        window.generateDocx = async function () {
             let params = getQueryParams();
 
             let num_aff = params.num_aff || "XXXXXX";
@@ -43,8 +15,6 @@
             let first_name = params.first_name || "Prénom";
             let last_name = params.last_name || "Nom";
             let date = formatDate(new Date());
-
-            const { Document, Packer, Paragraph, TextRun } = window.docx;
 
             const doc = new Document({
                 sections: [{
@@ -81,8 +51,33 @@
             link.href = url;
             link.download = `Certification_${num_aff}.docx`;
             link.click();
+        };
+
+        function getQueryParams() {
+            let params = {};
+            let queryString = window.location.search.substring(1);
+            let queryArray = queryString.split("&");
+
+            queryArray.forEach(param => {
+                let [key, value] = param.split("=");
+                if (key && value) {
+                    params[key] = decodeURIComponent(value.replace(/\+/g, " "));
+                }
+            });
+
+            return params;
+        }
+
+        function formatDate(date) {
+            const options = { day: "numeric", month: "long", year: "numeric" };
+            return date.toLocaleDateString("fr-FR", options);
         }
     </script>
+</head>
+<body>
+
+    <h2>Génération du document Word</h2>
+    <button onclick="generateDocx()">Télécharger le DOCX</button>
 
 </body>
 </html>
