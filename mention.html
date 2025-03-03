@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générer un DOCX</title>
     <script type="module">
-        import { Document, Packer, Paragraph, TextRun } from "https://cdn.jsdelivr.net/npm/docx@8.2.2/+esm";
+        import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType } from "https://cdn.jsdelivr.net/npm/docx@8.2.2/+esm";
 
         window.generateDocx = async function () {
             let params = getQueryParams();
@@ -16,33 +16,50 @@
             let last_name = params.last_name || "Nom";
             let date = formatDate(new Date());
 
+            // Création du contenu sous forme de paragraphes en gras
+            const paragraphs = [
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    children: [new TextRun({ text: "CERTIFICATION DE SIGNATURE", bold: true, size: 24 })],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    children: [new TextRun({ text: `Dossier n° ${num_aff}`, bold: true, underline: true, size: 20 })],
+                }),
+                new Paragraph(""),
+                new Paragraph({ children: [new TextRun({ text: `Le Notaire soussigné certifie la signature de ${civ} ${first_name} ${last_name} au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.`, bold: true }) }),
+                new Paragraph(""),
+                new Paragraph({ children: [new TextRun({ text: "Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document.", bold: true }) }),
+                new Paragraph(""),
+                new Paragraph({ children: [new TextRun({ text: "Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974.", bold: true }) }),
+                new Paragraph(""),
+                new Paragraph({ children: [new TextRun({ text: "Fait à CROISSY-SUR-SEINE (France)", bold: true }) }),
+                new Paragraph({ children: [new TextRun({ text: `Le ${date}`, bold: true }) }),
+                new Paragraph(""),
+            ];
+
+            // Création d'un tableau à cellule unique contenant le texte
+            const table = new Table({
+                width: { size: 3500, type: WidthType.DXA }, // Largeur de 350px (~3500 DXA)
+                rows: [
+                    new TableRow({
+                        children: [
+                            new TableCell({
+                                width: { size: 3500, type: WidthType.DXA },
+                                margins: { top: 200, bottom: 200, left: 200, right: 200 },
+                                borders: { top: { size: 3 }, bottom: { size: 3 }, left: { size: 3 }, right: { size: 3 } },
+                                children: paragraphs,
+                            }),
+                        ],
+                    }),
+                ],
+            });
+
             const doc = new Document({
                 sections: [{
                     properties: {},
-                    children: [
-                        new Paragraph({
-                            alignment: "center",
-                            children: [new TextRun({ text: "CERTIFICATION DE SIGNATURE", bold: true, size: 24 })]
-                        }),
-                        new Paragraph({
-                            alignment: "center",
-                            children: [new TextRun({ text: `Dossier n° ${num_aff}`, bold: true, underline: true, size: 20 })]
-                        }),
-                        new Paragraph(""),
-                        new Paragraph(`Le Notaire soussigné certifie la signature de ${civ} ${first_name} ${last_name} au vu d’un document d’identité qui lui a été présenté, sous réserve de l’authenticité dudit document.`),
-                        new Paragraph(""),
-                        new Paragraph("Le Notaire ne certifie pas la capacité et les pouvoirs du signataire, ni la validité juridique du document."),
-                        new Paragraph(""),
-                        new Paragraph("Le présent document étant destiné à être produit à l’étranger, le Notaire y appose son sceau conformément à la circulaire n° 1012 du CSN du 28 mai 1974."),
-                        new Paragraph(""),
-                        new Paragraph({
-                            children: [new TextRun({ text: "Fait à CROISSY-SUR-SEINE (France)", bold: true })]
-                        }),
-                        new Paragraph({
-                            children: [new TextRun({ text: `Le ${date}`, bold: true })]
-                        }),
-                    ]
-                }]
+                    children: [table],
+                }],
             });
 
             const blob = await Packer.toBlob(doc);
