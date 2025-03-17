@@ -35,15 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const qcm_contenance = [
         {
-            id: "bscm49hfcy",
+            id: "1",
             title: "L'unité de mesure de la contenance"
         },
         {
-            id: "8u8x96hqnk",
+            id: "2",
             title: "L'instrument de mesure de la contenance"
         }
     ];
 
+    const qcm_dir = "contenance";
     const qcm_data = qcm_contenance;
 
     const template = document.querySelector('#qcm-question-template');
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.dir(QCMDiv.innerHTML);
 
         if (link) {
-            link.setAttribute('href', 'qcm.html?yaml=qcm' + qcm.id);
+            link.setAttribute('href', 'qcm.html?yaml=qcm' + qcm.id + '&dir=' + qcm_dir);
         }
 
         if (button) {
