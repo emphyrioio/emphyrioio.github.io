@@ -22,6 +22,8 @@ function loadYAML() {
     // Construct the full file path, ensuring it is inside the yaml/ directory
     const yamlPath = `yaml/${dir}/${yamlFile}.yaml`;
 
+    console.log("Trying to fetch YAML file from:", yamlPath);
+
     fetch(yamlPath)
         .then(response => {
             console.log("Fetching:", yamlPath);
