@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const qcm_contenance = [
         {
             id: "1",
-            title: "L'unité de mesure de la contenance"
+            title: "Unité de mesure de la contenance"
         },
         {
             id: "2",
-            title: "L'instrument de mesure de la contenance"
+            title: "Instrument de mesure de la contenance"
         }
     ];
 
