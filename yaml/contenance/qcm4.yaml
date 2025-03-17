@@ -1,0 +1,24 @@
+- quest: "Combien vaut 1 Décilitre (dL) ?"
+  responses:
+    - resp: "1 litre divisé par 10."
+      val: true
+    - resp: "1 litre divisisé par 1OO."
+      val: false
+    - resp: "1 litre divisé par 1000."
+      val: false
+- quest: "Combien vaut 1 Centilitre (cL) ?"
+  responses:
+    - resp: "1 litre divisé par 100."
+      val: true
+    - resp: "1 litre divisisé par 1O."
+      val: false
+    - resp: "1 litre divisé par 1000."
+      val: false
+- quest: "Combien vaut 1 Millilitre (mL) ?"
+  responses:
+    - resp: "1 litre divisé par 1000."
+      val: true
+    - resp: "1 litre divisisé par 1O."
+      val: false
+    - resp: "1 litre divisé par 100."
+      val: false

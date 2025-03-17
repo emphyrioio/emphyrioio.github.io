@@ -1,0 +1,24 @@
+- quest: "Combien vaut 1 Décalitre (daL) ?"
+  responses:
+    - resp: "10 litres."
+      val: true
+    - resp: "1OO litres."
+      val: false
+    - resp: "1000 litres."
+      val: false
+- quest: "Combien vaut 1 Hectolitre (hL) ?"
+  responses:
+    - resp: "100 litres."
+      val: true
+    - resp: "1O litres."
+      val: false
+    - resp: "1000 litres."
+      val: false
+- quest: "Combien vaut 1 Kilolitre (kL) ?"
+  responses:
+    - resp: "10000 litres."
+      val: true
+    - resp: "1O litres."
+      val: false
+    - resp: "100 litres."
+      val: false

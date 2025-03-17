@@ -1,11 +1,9 @@
 - quest: "Quel est l'instrument de mesure de la contenance ?"
+  img: "https://static.materiel-horeca.com/87846-home_default/pichet-mesureur-en-polypropylene-500ml.jpg"
   responses:
     - resp: "Un verre doseur gradué."
       val: true
-      img: "https://static.materiel-horeca.com/87846-home_default/pichet-mesureur-en-polypropylene-500ml.jpg"
     - resp: "La balance."
       val: false
-      img: "https://www.objets-de-legende.fr/wp-content/uploads/sites/222/2022/04/balance-roberval.jpg"
     - resp: "Une règle."
-      img: "https://la-petite-epicerie.fr/61780-medium_default/regle-de-mesure-en-metal-30-cm.jpg"
       val: false
