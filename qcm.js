@@ -17,15 +17,16 @@ function loadYAML() {
 
     // Validate and sanitize inputs
     yamlFile = sanitizeInput(yamlFile) || 'qcm1'; // Default file name if invalid
-    dir = sanitizeInput(dir) || 'yaml'; // Default directory if invalid
+    dir = sanitizeInput(dir) || ''; // Default directory if invalid
 
-    // Construct the full file path
-    const yamlPath = `${dir}/${yamlFile}.yaml`;
+    // Construct the full file path, ensuring it is inside the yaml/ directory
+    const yamlPath = `yaml/${dir}/${yamlFile}.yaml`;
 
     fetch(yamlPath)
         .then(response => {
+            console.log("Fetching:", yamlPath);
             if (!response.ok) {
-                throw new Error('HTTP Error ' + response.status);
+                throw new Error(`HTTP Error ${response.status}: ${yamlPath}`);
             }
             return response.text();
         })
@@ -36,7 +37,10 @@ function loadYAML() {
         })
         .catch(error => {
             console.error('Error loading YAML file:', error);
-            document.getElementById('questions-container').innerHTML = '<p class="text-danger">Unable to load the questionnaire. Please check the YAML file name and directory.</p>';
+            document.getElementById('questions-container').innerHTML = `
+                <p class="text-danger">Unable to load the questionnaire.<br>
+                <strong>Check the file path:</strong> ${yamlPath}</p>
+            `;
         });
 }
 
