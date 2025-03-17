@@ -1,0 +1,8 @@
+- quest: "Quelle est l'unité de mesure de la contenance ?"
+  responses:
+    - resp: "Le litre (l ou L)."
+      val: true
+    - resp: "Le mètre (m)."
+      val: false
+    - resp: "Le kilogramme (kg)."
+      val: false

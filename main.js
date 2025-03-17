@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // QCMs
-    const qcm_data = [
+    const qcm_prehistoire = [
         {
             id: "1",
             title: "La Préhistoire"
@@ -32,6 +32,19 @@ document.addEventListener("DOMContentLoaded", function () {
             title: "Les animaux vivipares et ovipares III"
         }
     ];
+
+    const qcm_contenance = [
+        {
+            id: "bscm49hfcy",
+            title: "L'unité de mesure de la contenance"
+        },
+        {
+            id: "8u8x96hqnk",
+            title: "L'instrument de mesure de la contenance"
+        }
+    ];
+
+    const qcm_data = qcm_contenance;
 
     const template = document.querySelector('#qcm-question-template');
     const qcmQuestionsDiv = document.getElementById('qcm-questions');
