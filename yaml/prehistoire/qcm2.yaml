@@ -1,0 +1,71 @@
+- quest: "Qu'est-ce que le Paléolitique ?"
+  responses:
+    - resp: "L'âge de la pièrre taillée."
+      val: true
+    - resp: "L'âge de la pierre lisse."
+      val: false
+    - resp: "L'âge du feu."
+      val: false
+
+- quest: "Qu'est-ce que le Néolitique ?"
+  responses:
+    - resp: "L'âge de la pièrre polie."
+      val: true
+    - resp: "L'âge de la pierre chaude."
+      val: false
+    - resp: "L'âge des bonbons."
+      val: false
+
+- quest: "Quand commence le Paléolitique ?"
+  responses:
+    - resp: "Il y 2,5 millions d'année."
+      val: true
+    - resp: "Il y a 200000 ans."
+      val: false
+    - resp: "Il est toujours en cours."
+      val: false
+
+- quest: "Quand commence le Néolitique ?"
+  responses:
+    - resp: "En -10000."
+      val: true
+    - resp: "En 1959."
+      val: false
+    - resp: "Il y a 7 millions d'années."
+      val: false
+
+- quest: "A quelle sorte d'Hommes appartient Lucy ?"
+  responses:
+    - resp: "L'Australopithèque."
+      val: true
+    - resp: "L'Américanopithèque."
+      val: false
+    - resp: "Les grands singes."
+      val: false
+
+- quest: "Que signifie Homo habilis ?"
+  responses:
+    - resp: "L'Homme qui sait fabriquer des outils."
+      val: true
+    - resp: "L'Homme sage."
+      val: false
+    - resp: "L'Homme poupaï."
+      val: false
+
+- quest: "Que signifie Homo erectus ?"
+  responses:
+    - resp: "L'Homme debout."
+      val: true
+    - resp: "L'Homme mince."
+      val: false
+    - resp: "L'Homme gentil."
+      val: false
+
+- quest: "Que signifie Homo sapiens ?"
+  responses:
+    - resp: "L'Homme intelligent (c'est nous)."
+      val: true
+    - resp: "L'Homme qui voyage dans l'espace."
+      val: false
+    - resp: "L'Homme qui fait des blagues."
+      val: false

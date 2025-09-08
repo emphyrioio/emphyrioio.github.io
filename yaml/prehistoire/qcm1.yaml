@@ -1,0 +1,45 @@
+- quest: "Quand a commencé la Préhistoire ?"
+  responses:
+    - resp: "Il y a 7 millions d'années."
+      val: true
+    - resp: "Il y a -3500 ans."
+      val: false
+    - resp: "En 2024."
+      val: false
+
+- quest: "Quand s'est terminée la Préhistoire ?"
+  responses:
+    - resp: "En -3000"
+      val: true
+    - resp: "En 1943"
+      val: false
+    - resp: "En -10000"
+      val: false
+
+- quest: "La Préhistoire a pris fin :"
+  responses:
+    - resp: "Avec l'invention de l'écriture."
+      val: true
+    - resp: "Avec le chute de l'Empire romain."
+      val: false
+    - resp: "Avec la naissance de Jésus Christ."
+      val: false
+
+- quest: "Qu'est-ce que l'Histoire ?"
+  responses:
+    - resp: "Ecrire les événements du passé de l'évolution humaine."
+      val: true
+    - resp: "L'évoution des gorilles."
+      val: false
+    - resp: "L'évolution des plantes."
+      val: false
+
+- quest: "Que signifie le mot \"Préhistoire\" ?"
+  responses:
+    - resp: "Avant l'Histoire."
+      val: true
+    - resp: "Après l'Histoire."
+      val: false
+    - resp: "Après Jésus Christ."
+      val: false
+

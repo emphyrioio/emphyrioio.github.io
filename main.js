@@ -5,31 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const qcm_prehistoire = [
         {
             id: "1",
-            title: "La Préhistoire"
+            title: "La Préhistoire I"
         },
         {
             id: "2",
-            title: "L'Histoire"
-        },
-        {
-            id: "3",
-            title: "Les formes géométriques"
-        },
-        {
-            id: "4",
-            title: "La géométrie"
-        },
-        {
-            id: "5",
-            title: "Les animaux vivipares et ovipares I"
-        },
-        {
-            id: "6",
-            title: "Les animaux vivipares et ovipares II"
-        },
-        {
-            id: "7",
-            title: "Les animaux vivipares et ovipares III"
+            title: "La Préhistoire II"
         }
     ];
 
@@ -52,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ];
 
-    const qcm_dir = "contenance";
-    const qcm_data = qcm_contenance;
+    const qcm_dir = "prehistoire";
+    const qcm_data = qcm_prehistoire;
 
     const template = document.querySelector('#qcm-question-template');
     const qcmQuestionsDiv = document.getElementById('qcm-questions');
