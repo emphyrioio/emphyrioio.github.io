@@ -1,0 +1,63 @@
+- quest: "Comment dit-on lundi en anglais ?"
+  responses:
+    - resp: "Monday"
+      val: true
+    - resp: "Sunday"
+      val: false
+    - resp: "Saturday"
+      val: false
+
+- quest: "Comment dit-on mardi en anglais ?"
+  responses:
+    - resp: "Tuesday"
+      val: true
+    - resp: "Wednesday"
+      val: false
+    - resp: "Friday"
+      val: false
+
+- quest: "Comment dit-on mercredi en anglais ?"
+  responses:
+    - resp: "Wednesday"
+      val: true
+    - resp: "Sunday"
+      val: false
+    - resp: "Tuesday"
+      val: false
+
+- quest: "Comment dit-on jeudi en anglais ?"
+  responses:
+    - resp: "Thursday"
+      val: true
+    - resp: "Wednesday"
+      val: false
+    - resp: "Monday"
+      val: false
+
+- quest: "Comment dit-on vendredi en anglais ?"
+  responses:
+    - resp: "Friday"
+      val: true
+    - resp: "Monday"
+      val: false
+    - resp: "Thursday"
+      val: false
+
+- quest: "Comment dit-on samedi en anglais ?"
+  responses:
+    - resp: "Saturday"
+      val: true
+    - resp: "Sunday"
+      val: false
+    - resp: "Wednesday"
+      val: false
+
+- quest: "Comment dit-on dimanche en anglais ?"
+  responses:
+    - resp: "Sunday"
+      val: true
+    - resp: "Thursday"
+      val: false
+    - resp: "Friday"
+      val: false
+

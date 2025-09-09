@@ -2,6 +2,14 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // QCMs
+
+    const qcm_anglais = [
+        {
+            id: "1",
+            title: "Anglais : jours de la semaine"
+        }
+    ];
+
     const qcm_prehistoire = [
         {
             id: "1",
@@ -32,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ];
 
-    const qcm_dir = "prehistoire";
-    const qcm_data = qcm_prehistoire;
+    const qcm_dir = "anglais";
+    const qcm_data = qcm_anglais;
 
     const template = document.querySelector('#qcm-question-template');
     const qcmQuestionsDiv = document.getElementById('qcm-questions');
