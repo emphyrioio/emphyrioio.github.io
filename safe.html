@@ -1,0 +1,409 @@
+<!-- 535 x 879 = 470 265 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coffre</title>
+<style>
+  :root{
+    --bg:#0f1320;
+    --panel:#1e253b;
+    --light-yellow:#ffd54a;
+    --light-green:#5ee27a;
+    --light-red:#ff6666;
+  }
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 50% -10%, #1a2140 0%, #0b0e1a 60%, #070912 100%);
+    color:#e9ecff;
+    display:grid;
+    place-items:center;
+    padding:24px;
+  }
+  .wrap{
+    display:grid;
+    gap:24px;
+    width:min(980px, 92vw);
+  }
+
+  /* Coffre */
+  .coffre{
+    display:grid;
+    grid-template-columns: 1.2fr .9fr;
+    gap:24px;
+    align-items:stretch;
+  }
+  .chest{
+    background:
+      linear-gradient(#885a2b, #6d431f) padding-box,
+      linear-gradient(180deg, #b98958, #5c3a1a) border-box;
+    border:6px solid transparent;
+    border-radius:16px;
+    position:relative;
+    min-height:280px;
+    box-shadow:
+      inset 0 6px 16px rgba(0,0,0,.35),
+      0 14px 40px rgba(0,0,0,.45);
+  }
+  .chest:before, .chest:after{
+    content:"";
+    position:absolute; left:0; right:0;
+    height:8px;
+    background: linear-gradient(90deg, #b98757, #e1b37f 50%, #b98757);
+    opacity:.6;
+  }
+  .chest:before{ top:64px }
+  .chest:after{ top:138px }
+  .band{
+    position:absolute; top:0; bottom:0;
+    width:18px; background: linear-gradient(#c5c9d6,#8c95ad);
+    left:26%; border-radius:6px; opacity:.45;
+    box-shadow: inset 0 0 8px rgba(0,0,0,.35);
+  }
+  .band.r{ left:auto; right:26% }
+  .lock-plate{
+    position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:120px; height:120px; border-radius:14px;
+    background: linear-gradient(180deg, #b9c3d8, #6b7692);
+    box-shadow:
+      inset 0 0 16px rgba(0,0,0,.35),
+      0 10px 20px rgba(0,0,0,.35);
+    display:grid; place-items:center;
+  }
+  .keyhole{
+    width:18px; height:38px; border-radius:10px;
+    background:#0a0d18; position:relative;
+  }
+  .keyhole:before{
+    content:""; position:absolute; top:-14px; left:50%;
+    transform:translateX(-50%);
+    width:26px; height:26px; border-radius:50%;
+    background:#0a0d18;
+  }
+
+  /* Panneau clavier */
+  .panel{
+    background: linear-gradient(180deg, #202744, #161c33);
+    border: 1px solid #313b68;
+    border-radius:16px;
+    padding:18px;
+    display:grid;
+    grid-template-rows: auto auto 1fr;
+    gap:14px;
+    box-shadow:
+      inset 0 0 20px rgba(0,0,0,.35),
+      0 10px 24px rgba(0,0,0,.35);
+  }
+  .status{ display:flex; align-items:center; gap:12px; }
+  .led{
+    width:18px; height:18px; border-radius:50%;
+    background: var(--light-yellow);
+    box-shadow: 0 0 14px var(--light-yellow), inset 0 -3px 4px rgba(0,0,0,.35);
+    transition: background .25s ease, box-shadow .25s ease, transform .12s ease;
+  }
+  .led.yellow{ background:var(--light-yellow); box-shadow:0 0 14px var(--light-yellow), inset 0 -3px 4px rgba(0,0,0,.35) }
+  .led.green{ background:var(--light-green); box-shadow:0 0 14px var(--light-green), inset 0 -3px 4px rgba(0,0,0,.35) }
+  .led.red  { background:var(--light-red);   box-shadow:0 0 14px var(--light-red),   inset 0 -3px 4px rgba(0,0,0,.35) }
+  .screen{
+    background:#0b0f1f;
+    border:1px solid #2b355e;
+    border-radius:10px;
+    padding:10px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing:2px;
+    min-height:42px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .digits{ opacity:.95; font-size:18px }
+  .hint{ opacity:.55; font-size:12px }
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+  }
+  button.key{
+    appearance:none; -webkit-appearance:none;
+    background: linear-gradient(#2a335d, #1b2246);
+    border:1px solid #3a4684;
+    color:#eaf0ff; font-size:20px; font-weight:600;
+    padding:14px 0; border-radius:12px; cursor:pointer;
+    transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow: 0 3px 0 #111731, 0 8px 18px rgba(0,0,0,.35);
+  }
+  button.key:active{ transform: translateY(2px); box-shadow: 0 1px 0 #111731, 0 4px 10px rgba(0,0,0,.35) }
+  button.key:disabled{ opacity:.45; cursor:not-allowed }
+  .message{ margin-top:6px; min-height:24px; color:#9fe2a6; font-weight:700; }
+
+  @media (max-width: 820px){
+    .coffre{ grid-template-columns: 1fr; }
+    .chest{ min-height:200px }
+  }
+
+  /* MODALE */
+  .modal-backdrop{
+    position: fixed; inset:0;
+    background: rgba(0,0,0,.55);
+    display:none;
+    align-items:center; justify-content:center;
+    z-index: 50;
+  }
+  .modal{
+    background: linear-gradient(180deg, #1b2344, #111733);
+    border:1px solid #2e3b6f;
+    border-radius:18px;
+    padding:22px;
+    width:min(520px, 92vw);
+    box-shadow: 0 18px 60px rgba(0,0,0,.55);
+    text-align:center;
+  }
+  .modal h2{
+    margin:0 0 8px 0;
+    font-size:1.2rem;
+    color:#c6ffe0;
+  }
+  .modal p{ margin:0 0 16px 0 }
+  .modal .btn{
+    appearance:none;
+    background:#2a865a;
+    border:0; color:white; font-weight:700;
+    padding:10px 16px; border-radius:12px; cursor:pointer;
+  }
+  .modal-show{ display:flex }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="coffre" aria-label="Coffre avec clavier numérique">
+      <!-- Le coffre visuel -->
+      <div class="chest" aria-hidden="true">
+        <div class="band"></div>
+        <div class="band r"></div>
+        <div class="lock-plate">
+          <div class="keyhole"></div>
+        </div>
+      </div>
+
+      <!-- Le panneau clavier + voyant -->
+      <div class="panel">
+        <div class="status">
+          <div id="led" class="led yellow" aria-label="Voyant d'état" role="img"></div>
+          <div>Voyant</div>
+        </div>
+
+        <div class="screen" aria-live="polite">
+          <div id="digits" class="digits" aria-label="Code saisi">_ _ _ _ _ _</div>
+          <div class="hint">Entrez 6 chiffres</div>
+        </div>
+
+        <div class="grid" aria-label="Clavier numérique">
+          <button class="key" data-k="1">1</button>
+          <button class="key" data-k="2">2</button>
+          <button class="key" data-k="3">3</button>
+          <button class="key" data-k="4">4</button>
+          <button class="key" data-k="5">5</button>
+          <button class="key" data-k="6">6</button>
+          <button class="key" data-k="7">7</button>
+          <button class="key" data-k="8">8</button>
+          <button class="key" data-k="9">9</button>
+          <div></div>
+          <button class="key" data-k="0" style="grid-column:2;">0</button>
+          <div></div>
+        </div>
+
+        <div id="msg" class="message" aria-live="polite"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Fenêtre modale -->
+  <div id="backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal">
+      <h2 id="modal-title">Bravo !</h2>
+      <p id="modal-text">Le cadeau est dans ta cabane</p>
+      <button id="closeModal" class="btn">Fermer</button>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const SECRET = "470265";
+  const MAXLEN = SECRET.length;
+
+  const led = document.getElementById('led');
+  const digitsEl = document.getElementById('digits');
+  const msgEl = document.getElementById('msg');
+  const keys = Array.from(document.querySelectorAll('button.key'));
+  const backdrop = document.getElementById('backdrop');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  let buffer = "";
+  let locked = false;
+
+  /* ---------- UI helpers ---------- */
+  function setLED(color){
+    led.classList.remove('yellow','green','red');
+    led.classList.add(color);
+  }
+  function renderDigits(){
+    const shown = buffer.split('').join(' ');
+    const blanks = Array(Math.max(0, MAXLEN - buffer.length)).fill('_').join(' ');
+    digitsEl.textContent = [shown, blanks].filter(Boolean).join(' ');
+  }
+  function disableKeys(state){ keys.forEach(k => k.disabled = state); }
+
+  function reset(after=0){
+    setTimeout(() => {
+      buffer = "";
+      renderDigits();
+      setLED('yellow');
+      msgEl.textContent = "";
+      locked = false;
+      disableKeys(false);
+    }, after);
+  }
+
+  /* ---------- Audio engine ---------- */
+  function makeCtx(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    return new AC();
+  }
+  // Joue une note simple
+  function tone(ctx, {freq=440, type='sine', start=0, dur=0.18, gain=0.08}={}){
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+    g.gain.setValueAtTime(0, ctx.currentTime + start);
+    g.gain.linearRampToValueAtTime(gain, ctx.currentTime + start + 0.01);
+    g.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + start + dur);
+    osc.connect(g).connect(ctx.destination);
+    osc.start(ctx.currentTime + start);
+    osc.stop(ctx.currentTime + start + dur + 0.02);
+  }
+  // Petit bruit court (pour “buzzer”)
+  function buzz(ctx, {start=0, dur=0.14, gain=0.06}={}){
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(120, ctx.currentTime + start);
+    // petite descente pour effet erreur
+    osc.frequency.linearRampToValueAtTime(70, ctx.currentTime + start + dur);
+    g.gain.setValueAtTime(gain, ctx.currentTime + start);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + dur);
+    osc.connect(g).connect(ctx.destination);
+    osc.start(ctx.currentTime + start);
+    osc.stop(ctx.currentTime + start + dur + 0.02);
+  }
+
+  // Son d'erreur “logiciel” : bip haut + descente + buzz court ×2
+  function errorJingle(){
+    try{
+      const ctx = makeCtx();
+      // bip rapide haut
+      tone(ctx, {freq:980, type:'square', dur:0.10, gain:0.06});
+      // chute
+      tone(ctx, {freq:520, type:'triangle', start:0.10, dur:0.12, gain:0.06});
+      // double buzz pour signature “erreur”
+      buzz(ctx, {start:0.24, dur:0.12, gain:0.06});
+      buzz(ctx, {start:0.40, dur:0.12, gain:0.05});
+      setTimeout(()=>ctx.close(), 800);
+    }catch{}
+  }
+
+  // Petite musique de victoire : do-mi-sol-do’ puis cadence (sol-la#-la-sol)
+  function successJingle(){
+    try{
+      const ctx = makeCtx();
+      const bpm = 160, beat = 60/bpm; // noire
+      const notes = [
+        {f:261.63, t:0*beat}, // C4
+        {f:329.63, t:0.5*beat},
+        {f:392.00, t:1.0*beat},
+        {f:523.25, t:1.5*beat}, // C5
+        {f:392.00, t:2.3*beat},
+        {f:466.16, t:2.6*beat},
+        {f:440.00, t:2.9*beat},
+        {f:392.00, t:3.3*beat}
+      ];
+      notes.forEach(n => tone(ctx, {freq:n.f, type:'sine', start:n.t, dur:0.22, gain:0.08}));
+      // petit “sparkle” en arrière-plan
+      tone(ctx, {freq:784.00, type:'triangle', start:1.5*beat, dur:0.35, gain:0.05});
+      setTimeout(()=>ctx.close(), 2000);
+    }catch{}
+  }
+
+  /* ---------- Logique ---------- */
+  function success(){
+    setLED('green');
+    msgEl.textContent = ""; // message via modale
+    locked = true;
+    disableKeys(true);
+    successJingle();
+    showModal();
+  }
+
+  function failure(){
+    setLED('red');
+    msgEl.textContent = "Code incorrect";
+    errorJingle();
+    // Retour au jaune + effacement après 1 seconde
+    reset(1000);
+  }
+
+  function handleDigit(d){
+    if(locked) return;
+    if(buffer.length >= MAXLEN) return;
+    buffer += d;
+    renderDigits();
+
+    if(buffer.length === MAXLEN){
+      if(buffer === SECRET){
+        success();
+      }else{
+        failure();
+      }
+    }
+  }
+
+  // Clics sur les touches
+  keys.forEach(btn => {
+    btn.addEventListener('click', () => handleDigit(btn.dataset.k));
+  });
+
+  // Autoriser aussi le clavier physique (0-9)
+  window.addEventListener('keydown', (e) => {
+    const k = e.key;
+    if(k >= '0' && k <= '9'){
+      handleDigit(k);
+    }
+  }, {passive:true});
+
+  // Modale
+  function showModal(){
+    backdrop.classList.add('modal-show');
+    backdrop.setAttribute('aria-hidden', 'false');
+    closeModalBtn.focus();
+  }
+  function hideModal(){
+    backdrop.classList.remove('modal-show');
+    backdrop.setAttribute('aria-hidden', 'true');
+  }
+  closeModalBtn.addEventListener('click', hideModal);
+  backdrop.addEventListener('click', (e) => {
+    if(e.target === backdrop) hideModal();
+  });
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && backdrop.classList.contains('modal-show')) hideModal();
+  });
+
+  // Init
+  renderDigits();
+  setLED('yellow');
+})();
+</script>
+</body>
+</html>
