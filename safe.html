@@ -201,9 +201,8 @@
           <button class="key" data-k="7">7</button>
           <button class="key" data-k="8">8</button>
           <button class="key" data-k="9">9</button>
-          <div></div>
-          <button class="key" data-k="0" style="grid-column:2;">0</button>
-          <div></div>
+          <button class="key" data-k="E">E</button>
+          <button class="key" data-k="0">0</button>
         </div>
 
         <div id="msg" class="message" aria-live="polite"></div>
@@ -251,22 +250,24 @@
   }
   function disableKeys(state){ keys.forEach(k => k.disabled = state); }
 
+  function clearAll(){
+    buffer = "";
+    renderDigits();
+    setLED('yellow');
+    msgEl.textContent = "";
+  }
+
   function reset(after=0){
     setTimeout(() => {
-      buffer = "";
-      renderDigits();
-      setLED('yellow');
-      msgEl.textContent = "";
+      clearAll();
       locked = false;
       disableKeys(false);
     }, after);
   }
 
   /* ---------- Audio ---------- */
-  // Lecture du son d'erreur Windows depuis le fichier MP3 préchargé
   function errorJingle(){
     try{
-      // remet au début et joue; ignore les erreurs d’autoplay si jamais
       errorAudio.pause();
       errorAudio.currentTime = 0;
       const p = errorAudio.play();
@@ -274,7 +275,7 @@
     }catch(e){}
   }
 
-  // Petite musique de victoire (Web Audio)
+  // Victoire (Web Audio)
   function makeCtx(){
     const AC = window.AudioContext || window.webkitAudioContext;
     return new AC();
@@ -328,29 +329,39 @@
     reset(1000);
   }
 
-  function handleDigit(d){
+  function handleInput(k){
     if(locked) return;
-    if(buffer.length >= MAXLEN) return;
-    buffer += d;
-    renderDigits();
 
-    if(buffer.length === MAXLEN){
-      if(buffer === SECRET){
-        success();
-      }else{
-        failure();
+    // Effacer tout si 'E'
+    if(k === 'E'){
+      clearAll();
+      return;
+    }
+
+    // Accepter seulement des chiffres
+    if(k >= '0' && k <= '9'){
+      if(buffer.length >= MAXLEN) return;
+      buffer += k;
+      renderDigits();
+
+      if(buffer.length === MAXLEN){
+        if(buffer === SECRET){
+          success();
+        }else{
+          failure();
+        }
       }
     }
   }
 
-  // Clics sur les touches
-  keys.forEach(btn => btn.addEventListener('click', () => handleDigit(btn.dataset.k)));
+  // Clics sur les touches (inclut la touche E)
+  keys.forEach(btn => btn.addEventListener('click', () => handleInput(btn.dataset.k)));
 
-  // Clavier physique (0-9)
+  // Clavier physique : chiffres et E/e
   window.addEventListener('keydown', (e) => {
     const k = e.key;
-    if(k >= '0' && k <= '9'){
-      handleDigit(k);
+    if((k >= '0' && k <= '9') || k === 'E' || k === 'e'){
+      handleInput(k.toUpperCase());
     }
   }, {passive:true});
 
